@@ -16,13 +16,16 @@ public class Commercial extends Employe {
         this.caAnnuel = caAnnuel;
     }
 
-//    @Override
-//    public Double getPrimeAnnuelle(){
-//        double prime = 500d;
-//        if(this.caAnnuel != null) {
-//            prime = Math .ceil(Math.max(prime, this.caAnnuel * 0.05));
-//        }
-// redefinition de prime annuelle non defini plus tot (j'ai oublié)
+    public Commercial(){}
+
+    @Override
+    public Double getPrimeAnnuelle() {
+        double prime = 500d;
+        if (this.caAnnuel != null) {
+            prime = Math.ceil(Math.max(prime, this.caAnnuel * 0.05));
+        }
+        return prime;
+    }
 
     public Commercial(String nom, String prenom, String matricule,
                       LocalDate dateEmbauche, Double salaire, Double caAnnuel){
@@ -66,11 +69,6 @@ public class Commercial extends Employe {
         return this.performance.equals(performance);
     }
 
-    @Override
-    public Integer getNbConges() {
-        return super.getNbConges() + this.getNombreAnneeAnciennete();
-
-    }
 
 
 }

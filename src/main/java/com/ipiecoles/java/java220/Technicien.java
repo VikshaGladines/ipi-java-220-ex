@@ -1,5 +1,8 @@
 package com.ipiecoles.java.java220;
 import org.joda.time.LocalDate;
+
+import java.util.Objects;
+
 public class Technicien extends Employe {
 
     private Integer grade;
@@ -34,7 +37,22 @@ public class Technicien extends Employe {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Technicien that = (Technicien) o;
+        return Objects.equals(grade, that.grade);
+    }
+
+    @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(super.hashCode(), grade);
+    }
+
+    @Override
+    public Integer getNbConges() {
+        return super.getNbConges() + this.getNombreAnneeAnciennete();
+
     }
 }

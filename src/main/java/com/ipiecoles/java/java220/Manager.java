@@ -1,4 +1,6 @@
 package com.ipiecoles.java.java220;
+import org.joda.time.LocalDate;
+
 import java.util.HashSet;
 public class Manager extends Employe {
 
@@ -22,4 +24,26 @@ public class Manager extends Employe {
     public void setEquipe(HashSet<Technicien> equipe) {
         this.equipe = equipe;
     }
+
+    @Override
+    public void setSalaire(Double salaire) {
+        super.setSalaire(salaire * Entreprise.INDICE_MANAGER + (salaire * equipe.size() / 10));
+    }
+
+    private void augmenterSalaireEquipe(Double pourcentage){
+        for (Technicien technicien : equipe) {
+            technicien.augmenterSalaire(pourcentage);
+        }
+    }
+
+    @Override
+    public void augmenterSalaire(Double pourcentage) {
+        augmenterSalaireEquipe(pourcentage);
+        super.augmenterSalaire(pourcentage);
+    }
+
+    public void ajoutTechnicienEquipe(String nom, String prenom, String matricule, LocalDate dateEmbauche, Double salaire, Integer grade){
+        this.ajoutTechnicienEquipe(new Technicien(nom, prenom, matricule, dateEmbauche, salaire, grade));
+    }
+
 }

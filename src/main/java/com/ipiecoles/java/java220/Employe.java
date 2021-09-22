@@ -11,8 +11,9 @@ public class Employe {
      private String matricule;
      private Double salaire;
      private LocalDate dateEmbauche;
-
-
+     private Boolean tempsPartiel;
+     private String sexe;
+     
 
     public Employe(){ //essentiel pour créer l'employé de base (constructeur par defaut)
 
@@ -27,7 +28,17 @@ public class Employe {
 
     }
 
-    public void augmeterSalaire(Double pourcentage){
+    public Employe(String nom, String prenom, String matricule, Double salaire, LocalDate dateEmbauche, Boolean tempsPartiel, String sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.matricule = matricule;
+        this.salaire = salaire;
+        this.dateEmbauche = dateEmbauche;
+        this.tempsPartiel = tempsPartiel;
+        this.sexe = sexe;
+    }
+
+    public void augmenterSalaire(Double pourcentage){
         this.salaire = this.salaire * (1 + pourcentage);
     }
 
@@ -39,6 +50,7 @@ public class Employe {
     public String getNom(){
         return this.nom;
     }
+
     public void setNom(String nom){
         this.nom = nom;
     }
@@ -46,6 +58,7 @@ public class Employe {
     public LocalDate getDateEmbauche() {
         return dateEmbauche;
     }
+
     public void setDateEmbauche(LocalDate dateEmbauche) throws Exception {
         if(dateEmbauche == null){
             throw new Exception("La date d'embauche ne peut pas être nulle");
@@ -60,6 +73,7 @@ public class Employe {
     public String getPrenom() {
         return prenom;
     }
+
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
@@ -67,6 +81,7 @@ public class Employe {
     public String getMatricule() {
         return matricule;
     }
+
     public void setMatricule(String matricule) {
         this.matricule = matricule;
     }
@@ -74,8 +89,29 @@ public class Employe {
     public Double getSalaire() {
         return salaire;
     }
+
     public void setSalaire(Double salaire) {
         this.salaire = salaire;
+    }
+
+    public Double getPrimeAnnuelle() {
+        return Entreprise.primeAnnuelleBase();
+    }
+
+    public Boolean getTempsPartiel() {
+        return tempsPartiel;
+    }
+
+    public void setTempsPartiel(Boolean tempsPartiel) {
+        this.tempsPartiel = tempsPartiel;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
 
     @Override
@@ -83,17 +119,12 @@ public class Employe {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employe employe = (Employe) o;
-        return
-                        Objects.equals(nom, employe.nom) &&
-                        Objects.equals(prenom, employe.prenom) &&
-                        Objects.equals(matricule, employe.matricule) &&
-                        Objects.equals(dateEmbauche, employe.dateEmbauche) &&
-                        Objects.equals(salaire, employe.salaire);
+        return Objects.equals(nom, employe.nom) && Objects.equals(prenom, employe.prenom) && Objects.equals(matricule, employe.matricule) && Objects.equals(salaire, employe.salaire) && Objects.equals(dateEmbauche, employe.dateEmbauche) && Objects.equals(tempsPartiel, employe.tempsPartiel) && Objects.equals(sexe, employe.sexe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, prenom, matricule, dateEmbauche, salaire);
+        return Objects.hash(nom, prenom, matricule, salaire, dateEmbauche, tempsPartiel, sexe);
     }
 
     public Integer getNbConges(){
@@ -108,9 +139,12 @@ public class Employe {
         sb.append(", matricule='").append(matricule).append('\'');
         sb.append(", salaire=").append(salaire);
         sb.append(", dateEmbauche=").append(dateEmbauche);
+        sb.append(", tempsPartiel=").append(tempsPartiel);
+        sb.append(", sexe='").append(sexe).append('\'');
         sb.append('}');
         return sb.toString();
     }
+
 }
 
 
